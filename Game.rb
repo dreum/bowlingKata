@@ -1,7 +1,12 @@
 class Game
+    def initialize()
+        @current_score = 0
+    end
+    
     def roll(pins)
+        @current_score += pins
     end
     def score()
-        0
+        @current_score
     end
 end
