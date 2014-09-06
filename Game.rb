@@ -11,6 +11,10 @@ class Game
         frame_score(current_roll) == 10
     end
     
+    def strike?(current_roll)
+        @rolls[current_roll] == 10
+    end
+    
     def frame_score(current_roll)
         @rolls[current_roll] + @rolls[current_roll + 1]
     end
@@ -20,12 +24,16 @@ class Game
         current_frame = 0
         current_roll = 0
         while current_frame < 10
-            if (spare?(current_roll))
+            if (strike?(current_roll))
                 current_score += frame_score(current_roll) + @rolls[current_roll + 2]
+                current_roll += 1
+            elsif (spare?(current_roll))
+                current_score += frame_score(current_roll) + @rolls[current_roll + 2]
+                current_roll += 2
             else
                 current_score += frame_score(current_roll)
+                current_roll += 2
             end
-            current_roll += 2
             current_frame += 1
         end
         current_score
